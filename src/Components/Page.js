@@ -33,24 +33,30 @@ class Page extends Component {
         }
     }
 
-    baseForm = {
-        inputBase: "",
-        inputNumber: "",
-        outputBase: ""
+
+    resetState = (e) => {
+        var baseForm = {
+            inputBase: "",
+            inputNumber: "",
+            outputBase: ""
+        }
+
+        var baseformErrorMessage = {
+            inputBaseError: "",
+            inputNumberError: "",
+            outputBaseError: ""
+        }
+
+        var baseformValid = {
+            inputBase: false,
+            inputNumber: false,
+            outputBase: false,
+            buttonActive: false
+        }
+
+        this.setState({ form: baseForm, formErrorMessage: baseformErrorMessage, formValid: baseformValid, outputNumber: "" })
     }
 
-    baseformErrorMessage = {
-        inputBaseError: "",
-        inputNumberError: "",
-        outputBaseError: ""
-    }
-
-    baseformValid = {
-        inputBase: false,
-        inputNumber: false,
-        outputBase: false,
-        buttonActive: false
-    }
 
 
     decimalSplitter = (inputNumber, inputBase) => {
@@ -119,7 +125,7 @@ class Page extends Component {
         var baseDecimalArr = []
         var decimalArr = decimalString.toString().split("")
         var decimalStringV = ''
-        while (decimalArr[decimalArr.length - 1] === "0") {
+        while (decimalArr[decimalArr.length - 1] === "0" && !decimalArr[decimalArr.length - 2] === 0) {
             decimalArr.pop()
         }
         var j = 0
@@ -141,9 +147,11 @@ class Page extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.setState({ loading: true })
         var splittedArr = this.decimalSplitter(this.state.form.inputNumber, this.state.form.inputBase)
         var convertedNumber = this.numberToBaseTen(splittedArr[0], this.state.form.inputBase)
+        if (convertedNumber === "") {
+            convertedNumber += '0'
+        }
         var output = ""
         if (splittedArr.length === 2) {
             var convertedDecimal = this.decimalToBaseTen(splittedArr[1], this.state.form.inputBase)
@@ -379,7 +387,7 @@ class Page extends Component {
                                             </InputGroup>
                                         </CopyToClipboard>
                                         <br />
-                                        <button className="btn btn-warning btn-block" onClick={() => { this.setState({ form: this.baseForm, formErrorMessage: this.baseformErrorMessage, formValid: this.baseformValid, outputNumber: "" }) }} ><h5 className="font-weight-bold">Reset</h5></button>
+                                        <button className="btn btn-warning btn-block" onClick={this.resetState} ><h5 className="font-weight-bold">Reset</h5></button>
                                     </div>
                                 </>
                             }
