@@ -147,6 +147,7 @@ class Page extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        var hi = "haha"
         var splittedArr = this.decimalSplitter(this.state.form.inputNumber, this.state.form.inputBase)
         var convertedNumber = this.numberToBaseTen(splittedArr[0], this.state.form.inputBase)
         if (convertedNumber === "") {
@@ -334,9 +335,9 @@ class Page extends Component {
                     <ReactFontLoader fonts={[{ name: 'Bree Serif' }]} />
                     <h3 style={{ fontFamily: 'Bree Serif', fontWeight: 'bold' }} className="text-dark ">
                         This is a playground for you, If you want to play with the numbers with different Bases.<br />
-                    You can provide your input number with any base.,say decimal,binary,hexa,octa...
-                    and you will get that number in your desired base
-                </h3>
+                        You can provide your input number with any base.,say decimal,binary,hexa,octa...
+                        and you will get that number in your desired base
+                    </h3>
                 </div>
 
 
