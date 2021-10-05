@@ -147,7 +147,7 @@ class Page extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        var hi = "haha"
+        var hi = "hahahahaha"
         var splittedArr = this.decimalSplitter(this.state.form.inputNumber, this.state.form.inputBase)
         var convertedNumber = this.numberToBaseTen(splittedArr[0], this.state.form.inputBase)
         if (convertedNumber === "") {
